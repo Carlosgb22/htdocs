@@ -2,7 +2,7 @@
 class conexion{
     function conectar(){
         $path = "../datos.txt";
-        $ar = fopen($path, "r") or
+        $ar = fopen($path, "r", true) or
             die("No se pudo abrir el archivo");
         $host = fgets($ar);
         $host = str_replace("\n", "", $host);

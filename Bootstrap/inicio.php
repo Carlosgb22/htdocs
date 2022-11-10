@@ -1,7 +1,10 @@
 <?php 
-require("php/sesion.php");
+include_once("php/sesion.php");
 $sess = new sesion();
-$session->session_set_save_handler(new sesion());
+session_set_save_handler($sess, false);
+session_start();
+
+$_SESSION['prueba']=1;
 ?>
 <!DOCTYPE html>
 <html lang="en">

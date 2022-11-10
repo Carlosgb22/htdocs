@@ -76,16 +76,16 @@ class sesion implements SessionHandlerInterface{
      */
     public function read(string $id): string|false{
         try {
-            $stmt = $this->con->prepare("SELECT 'sesion','creado' FROM usuario WHERE 'sesion' = ?");
-            $stmt->bind_param("s", $sessionId);
+            $stmt = $this->con->prepare("SELECT 'sesion' FROM usuario WHERE 'sesion' = ?");
+            $stmt->bind_param("s", $id);
             $stmt->execute();
             $stmt->bind_result($sessionData);
             $stmt->fetch();
             $stmt->close();
             if($sessionData == null){
-                $sql = "INSERT INTO usuario('sesion', 'creado') VALUES (?,?)";
+                $sql = "INSERT INTO usuario('sesion') VALUES (?,)";
                 $sentencia = $this->con->prepare($sql);
-                $sentencia->bind_param("s,s", $sessionId, time());
+                $sentencia->bind_param("s", $sessionId);
                 $sentencia->execute();
             }
             return $sessionData ? $sessionData : '';
@@ -102,7 +102,7 @@ class sesion implements SessionHandlerInterface{
      */
     public function write(string $id, string $data): bool{
         try {
-            $stmt = $this->con->prepare("REPLACE INTO usuario('sesion', 'creado', 'session_data') VALUES(?, ?, ?)");
+            $stmt = $this->con->prepare("REPLACE INTO sessions('session_id', 'creado', 'session_data') VALUES(?, ?, ?)");
             $time = time();
             $stmt->bind_param('sis',$id, $time, $data);
             $stmt->execute();
