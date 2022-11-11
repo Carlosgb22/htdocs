@@ -45,7 +45,7 @@ class sesion implements SessionHandlerInterface{
      * un destructor de la clase. En nuestro ejemplo no hacemos nada especial.
      */
     public function close(): bool{
-        echo "Se ha llamado a cerrar la sesión".$this->sessionId;
+        echo "Se ha llamado a cerrar la sesión ".$this->sessionId;
         return true;
     }
     /**
@@ -76,14 +76,20 @@ class sesion implements SessionHandlerInterface{
      */
     public function read(string $id): string|false{
         try {
-            $stmt = $this->con->prepare("SELECT 'sesion' FROM usuario WHERE 'sesion' = ?");
+            $stmt = $this->con->prepare("SELECT 'session_data' FROM sessions WHERE 'session_id' = ?");
             $stmt->bind_param("s", $id);
             $stmt->execute();
             $stmt->bind_result($sessionData);
             $stmt->fetch();
             $stmt->close();
             if($sessionData == null){
-                $sql = "INSERT INTO usuario('sesion') VALUES (?,)";
+                $sql = "INSERT INTO sessions(session_id, creado) VALUES (?,?)";
+                $sentencia = $this->con->prepare($sql);
+                $sessionId = $this->sessionId;
+                $time = time();
+                $sentencia->bind_param("si", $sessionId, $time);
+                $sentencia->execute();
+                $sql = "INSERT INTO usuario(sesion) VALUES (?)";
                 $sentencia = $this->con->prepare($sql);
                 $sentencia->bind_param("s", $sessionId);
                 $sentencia->execute();

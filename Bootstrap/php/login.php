@@ -19,9 +19,9 @@ $sentencia->execute();
 $result = $sentencia->get_result();
 foreach($result as $row){
     if(strcmp($pass, $row["contrasenia"]) == 0){
-        header("Location: http://localhost/Bootstrap/inicio.php");
+        header("Location: http://localhost/Bootstrap/index.php");
     }else{
-        header("Location: http://localhost/Bootstrap/index.html");
+        header("Location: http://localhost/Bootstrap/login.html");
     }
 }
 ?>
