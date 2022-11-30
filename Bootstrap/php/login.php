@@ -12,7 +12,7 @@ if($mantener == ""){
 $conexion = new conexion();
 $con = $conexion->conectar();
 $pass = md5($contrasenia);
-$sql = "SELECT nombre, contrasenia FROM usuario where nombre = ?";
+$sql = "SELECT email, contrasenia FROM usuario where email = ?";
 $sentencia = $con->prepare($sql);
 $sentencia->bind_param("s", $email);
 $sentencia->execute();

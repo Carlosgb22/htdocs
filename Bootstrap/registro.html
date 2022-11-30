@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +7,29 @@
     <title>Registro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<header class="menu">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <img src="img/cerveza.png" alt="Icono" style="height: 2%; width: 2%;">
+                <a class="navbar-brand" href="index.php" style="padding-left: 10px;">Cerveceria Carlos</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link disabled" href="#">En desarrollo</a>
+                        <a class="nav-link disabled" href="#">En desarrollo</a>
+                        <a class="nav-link disabled" href="#">En desarrollo</a>        
+                    </div>
+                </div>
+                <a class="nav-link active" href="login.html">Iniciar Sesion</a>
+            </div>
+        </nav>
+    </header>
+	<br>
     <div class="container">
         <div class="card" style="width: 50%; margin: auto;">
           <br>
@@ -16,19 +37,36 @@
           <div class="card-body">
               <h5 class="card-title" style="text-align:center;">Cerveceria Carlos</h5>
               <form action="php/registro.php" method="post">
+				<div class="form-group">
+					<label for="inputNombre">Nombre</label>
+					<input type="text" class="form-control" required id="inputNombre" placeholder="Introduzca nombre" name="nombre">
+				</div>
+				<div class="form-group">
+					<label for="inputApellidos">Apellidos</label>
+					<input type="text" class="form-control" required id="inputApellidos" placeholder="Introduzca apellidos" name="apellidos">
+				</div>
                 <div class="form-group">
                   <label for="inputEmail">Correo Electronico</label>
-                  <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Introduzca email" name="email">
+                  <input type="email" class="form-control" required id="inputEmail" aria-describedby="emailHelp" placeholder="Introduzca email" name="email">
                   <small id="emailHelp" class="form-text text-muted">No compartiremos tu email con terceros.</small>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword">Contraseña</label>
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Introduzca contraseña" name="contrasenia">
+                  <input type="password" class="form-control" required id="inputPassword" placeholder="Introduzca contraseña" name="contrasenia">
                 </div>
                 <div class="form-group">
                     <label for="inputRepeatPassword">Repite Contraseña</label>
-                    <input type="password" class="form-control" id="inputRepeatPassword" placeholder="Introduzca contraseña" name="contrasenia2">
-                  </div>
+                    <input type="password" class="form-control" required id="inputRepeatPassword" placeholder="Introduzca contraseña" name="contrasenia2">
+                </div>
+				<div class="form-group">
+					<label for="inputDireccion">Direccion</label>
+					<input type="text" class="form-control" required id="inputDireccion" placeholder="Introduzca su direccion" name="direccion">
+				</div>
+				<div class="form-group">
+					<label for="inputTelefono">Telefono</label>
+					<input type="tel" name="telephone" pattern="[0-9]{9}" title="Un numero de telefono valido consiste en 9 digitos" required 
+					class="form-control" id="inputTelefono" placeholder="Introduzca su telefono" name="telefono">
+				</div>
                 <button type="submit" class="btn btn-primary">Registrar</button>
               </form>
           </div>
