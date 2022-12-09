@@ -9,7 +9,7 @@ $contrasenia2 = htmlspecialchars($_REQUEST['contrasenia2']);
 $direccion = htmlspecialchars($_REQUEST['direccion']);
 $telefono = htmlspecialchars($_REQUEST['telefono']);
 if($contrasenia == "" || strcasecmp($contrasenia, $contrasenia2) != 0){
-    header("Location: http://localhost/Bootstrap/registro.html");
+    header("Location: http://localhost/Bootstrap/registro.php");
 }else{
     $conexion = new conexion();
     $con = $conexion->conectar();
@@ -21,7 +21,7 @@ if($contrasenia == "" || strcasecmp($contrasenia, $contrasenia2) != 0){
     $sentencia = $con->prepare($sql);
     $sentencia->bind_param("sssssi", $nombre, $apellidos, $email, $pass, $direccion, $telefono);
     $sentencia->execute();
-    $sentencia->close();
-    header("Location: http://localhost/Bootstrap/index.html");
+    $sentencia->closeCursor();
+    header("Location: http://localhost/Bootstrap/index.php");
 }
 ?>)

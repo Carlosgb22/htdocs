@@ -1,19 +1,25 @@
 <?php
 class conexion{
     function conectar(){
-        $path = "datos.txt";
-        $ar = fopen($path, "r", true) or
+        $path = "datos.ini";
+        $ar = parse_ini_file($path) or
             die("No se pudo abrir el archivo");
-        $host = fgets($ar);
-        $host = str_replace("\n", "", $host);
-        $usuario = fgets($ar);
-        $usuario = str_replace("\n", "", $usuario);
-        $contrBd = fgets($ar);
-        $contrBd = str_replace("\n", "", $contrBd);
-        $nombreBd = fgets($ar);
-        fclose($ar);
-        $con = mysqli_connect($host, $usuario, $contrBd, $nombreBd);
-        return $con;
-}
+        $host = $ar['host'];
+        $usuario = $ar['usuario'];
+        $contrBd = $ar['contrasenia'];
+        $nombreBd = $ar['dbname'];
+        //$con = new PDO("myqsl:host = $host; dbname = $nombreBd", $usuario, $contrBd);
+        try {
+            $conexion = new PDO("mysql:host=$host;dbname=$nombreBd", $usuario, $contrBd);      
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          }
+     
+      catch(PDOException $e)
+          {
+          echo "La conexión ha fallado: " . $e->getMessage();
+          }
+        //$con = mysqli_connect($host, $usuario, $contrBd, $nombreBd);
+        return $conexion;
+    }
 }
 ?>

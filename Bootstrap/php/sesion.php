@@ -31,9 +31,9 @@ class sesion implements SessionHandlerInterface{
     {
         try {
             $stmt = $this->con->prepare("DELETE FROM sessions WHERE session_id = ?");
-            $stmt->bind_param("s", $sessionId);
+            $stmt->bindParam(1, $sessionId, PDO::PARAM_STR);
             $stmt->execute();
-            $stmt->close();
+            $stmt->closeCursor();
  
             return TRUE;
         } catch (Exception $e) {
@@ -59,9 +59,9 @@ class sesion implements SessionHandlerInterface{
  
         try {
             $stmt = $this->con->prepare("UPDATE usuario SET sesion = null WHERE 'creado' < ?");
-            $stmt->bind_param("i", $past);
+            $stmt->bindParam(1, $past, PDO::PARAM_INT);
             $stmt->execute();
-            $stmt->close();
+            $stmt->closeCursor();
  
             return true;
         } catch (Exception $e) {
@@ -77,21 +77,25 @@ class sesion implements SessionHandlerInterface{
     public function read(string $id): string|false{
         try {
             $stmt = $this->con->prepare("SELECT 'session_data' FROM sessions WHERE 'session_id' = ?");
-            $stmt->bind_param("s", $id);
+            $stmt->bindParam(1, $id, PDO::PARAM_STR);
             $stmt->execute();
-            $stmt->bind_result($sessionData);
-            $stmt->fetch();
-            $stmt->close();
+            $sessionData = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
             if($sessionData == null){
                 $sql = "INSERT INTO sessions(session_id, creado) VALUES (?,?)";
                 $sentencia = $this->con->prepare($sql);
                 $sessionId = $this->sessionId;
                 $time = time();
-                $sentencia->bind_param("si", $sessionId, $time);
-                $sentencia->execute();
+                $sentencia->bindParam(1, $sessionId, PDO::PARAM_STR);
+                $sentencia->bindParam(2, $time, PDO::PARAM_INT);
+                try{
+                    $sentencia->execute();
+                }catch(PDOException $error){
+                    echo $error;
+                }                
                 $sql = "INSERT INTO usuario(sesion) VALUES (?)";
                 $sentencia = $this->con->prepare($sql);
-                $sentencia->bind_param("s", $sessionId);
+                $sentencia->bindParam(1, $sessionId, PDO::PARAM_STR);
                 $sentencia->execute();
             }
             return $sessionData ? $sessionData : '';
@@ -110,13 +114,15 @@ class sesion implements SessionHandlerInterface{
         try {
             $stmt = $this->con->prepare("REPLACE INTO sessions('session_id', 'creado', 'session_data') VALUES(?, ?, ?)");
             $time = time();
-            $stmt->bind_param('sis',$id, $time, $data);
+            $stmt->bindParam(1, $id, PDO::PARAM_STR);
+            $stmt->bindParam(2, $time, PDO::PARAM_INT);
+            $stmt->bindParam(3, $data, PDO::PARAM_STR);
             $stmt->execute();
-            $stmt->close();
+            $stmt->closeCursor();
             return true;
         } catch (Exception $e) {
             return false;
         }
     }
 }
-?>
+?>_param
