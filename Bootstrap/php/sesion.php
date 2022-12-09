@@ -45,7 +45,6 @@ class sesion implements SessionHandlerInterface{
      * un destructor de la clase. En nuestro ejemplo no hacemos nada especial.
      */
     public function close(): bool{
-        echo "Se ha llamado a cerrar la sesión ".$this->sessionId;
         return true;
     }
     /**

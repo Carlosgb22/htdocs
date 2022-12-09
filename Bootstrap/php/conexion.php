@@ -18,7 +18,6 @@ class conexion{
           {
           echo "La conexión ha fallado: " . $e->getMessage();
           }
-        //$con = mysqli_connect($host, $usuario, $contrBd, $nombreBd);
         return $conexion;
     }
 }

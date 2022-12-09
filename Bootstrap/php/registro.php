@@ -19,7 +19,12 @@ if($contrasenia == "" || strcasecmp($contrasenia, $contrasenia2) != 0){
     $pass = md5($contrasenia);
     $sql = "INSERT INTO usuario (nombre, apellidos, email, contrasenia, direccion, telefono) VALUES (?,?,?,?,?,?)";
     $sentencia = $con->prepare($sql);
-    $sentencia->bind_param("sssssi", $nombre, $apellidos, $email, $pass, $direccion, $telefono);
+    $sentencia->bindParam(1, $nombre, PDO::PARAM_STR);
+    $sentencia->bindParam(2, $apellidos, PDO::PARAM_STR);
+    $sentencia->bindParam(3, $email, PDO::PARAM_STR);
+    $sentencia->bindParam(4, $pass, PDO::PARAM_STR);
+    $sentencia->bindParam(5, $direccion, PDO::PARAM_STR);
+    $sentencia->bindParam(6, $telefono, PDO::PARAM_INT);
     $sentencia->execute();
     $sentencia->closeCursor();
     header("Location: http://localhost/Bootstrap/index.php");

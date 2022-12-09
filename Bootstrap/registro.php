@@ -9,8 +9,8 @@ include_once("php/cabezera.php")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/Bootstrap/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="/Bootstrap/css/style.css">
 </head>
 <body>
 	<br>
@@ -48,7 +48,7 @@ include_once("php/cabezera.php")
 				</div>
 				<div class="form-group">
 					<label for="inputTelefono">Telefono</label>
-					<input type="tel" name="telephone" pattern="[0-9]{9}" title="Un numero de telefono valido consiste en 9 digitos" required 
+					<input type="tel" pattern="[0-9]{9}" title="Un numero de telefono valido consiste en 9 digitos" required 
 					class="form-control" id="inputTelefono" placeholder="Introduzca su telefono" name="telefono">
 				</div>
                 <button type="submit" class="btn btn-primary">Registrar</button>

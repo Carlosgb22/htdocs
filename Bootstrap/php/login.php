@@ -18,7 +18,8 @@ $sentencia->bindParam(1, $email, PDO::PARAM_STR);
 $sentencia->execute();
 $result = $sentencia->fetch(PDO::FETCH_ASSOC);
 if(strcmp($pass, $result['contrasenia']) == 0){
-    header("Location: http://localhost/Bootstrap/index.php");
+    setcookie('email', $email, 0, '/Bootstrap/logued');
+    header("Location: http://localhost/Bootstrap/logued/logued.php");
 }else{
     header("Location: http://localhost/Bootstrap/login.php");
 }
