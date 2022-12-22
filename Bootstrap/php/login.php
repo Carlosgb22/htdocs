@@ -4,9 +4,9 @@ require("conexion.php");
 $email = htmlspecialchars($_REQUEST['email']);
 $contrasenia = htmlspecialchars($_REQUEST['contrasenia']);
 $mantener = htmlspecialchars($_REQUEST['mantener']);
-if($mantener == ""){
+if ($mantener == "") {
     $mantener = 0;
-}else{
+} else {
     $mantener = 1;
 }
 $conexion = new conexion();
@@ -17,10 +17,9 @@ $sentencia = $con->prepare($sql);
 $sentencia->bindParam(1, $email, PDO::PARAM_STR);
 $sentencia->execute();
 $result = $sentencia->fetch(PDO::FETCH_ASSOC);
-if(strcmp($pass, $result['contrasenia']) == 0){
+if (strcmp($pass, $result['contrasenia']) == 0) {
     setcookie('email', $email, 0, '/Bootstrap/logued');
     header("Location: http://localhost/Bootstrap/logued/logued.php");
-}else{
+} else {
     header("Location: http://localhost/Bootstrap/login.php");
 }
-?>

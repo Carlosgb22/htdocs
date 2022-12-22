@@ -1,4 +1,4 @@
-<?php 
+<?php
 require("conexion.php");
 
 $nombre = htmlspecialchars($_REQUEST['nombre']);
@@ -8,13 +8,13 @@ $contrasenia = htmlspecialchars($_REQUEST['contrasenia']);
 $contrasenia2 = htmlspecialchars($_REQUEST['contrasenia2']);
 $direccion = htmlspecialchars($_REQUEST['direccion']);
 $telefono = htmlspecialchars($_REQUEST['telefono']);
-if($contrasenia == "" || strcasecmp($contrasenia, $contrasenia2) != 0){
+if ($contrasenia == "" || strcasecmp($contrasenia, $contrasenia2) != 0) {
     header("Location: http://localhost/Bootstrap/registro.php");
-}else{
+} else {
     $conexion = new conexion();
     $con = $conexion->conectar();
-    if(!$con){
-        echo("Fallo al conectar con la base de datos");
+    if (!$con) {
+        echo ("Fallo al conectar con la base de datos");
     }
     $pass = md5($contrasenia);
     $sql = "INSERT INTO usuario (nombre, apellidos, email, contrasenia, direccion, telefono) VALUES (?,?,?,?,?,?)";

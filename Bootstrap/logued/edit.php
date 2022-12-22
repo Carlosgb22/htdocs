@@ -3,7 +3,7 @@ require_once("../php/conexion.php");
 $conex = new conexion();
 $con = $conex->conectar();
 //NO FUNCIONA
-if(strcmp($_REQUEST['imagen'], '') == 0){
+if (strcmp($_REQUEST['imagen'], '') == 0) {
     $stmt = $con->prepare("REPLACE INTO usuario('nombre', 'apellidos', 'direccion', 'telefono') VALUES(?, ?, ?, ?) WHERE 'email' = ?");
     $stmt->bindParam(1, $_REQUEST['nombre'], PDO::PARAM_STR);
     $stmt->bindParam(2, $_REQUEST['apellidos'], PDO::PARAM_STR);
@@ -12,7 +12,7 @@ if(strcmp($_REQUEST['imagen'], '') == 0){
     $stmt->bindParam(5, $_REQUEST['email'], PDO::PARAM_STR);
     $stmt->execute();
     $stmt->closeCursor();
-}else{
+} else {
     $stmt = $con->prepare("REPLACE INTO usuario('nombre', 'apellidos', 'direccion', 'telefono', 'imagen') VALUES(?, ?, ?, ?, ?) WHERE 'email' = ?");
     $stmt->bindParam(1, $_REQUEST['nombre'], PDO::PARAM_STR);
     $stmt->bindParam(2, $_REQUEST['apellidos'], PDO::PARAM_STR);
@@ -23,6 +23,3 @@ if(strcmp($_REQUEST['imagen'], '') == 0){
     $stmt->execute();
     $stmt->closeCursor();
 }
-
-
-?>

@@ -1,6 +1,8 @@
 <?php
-class conexion{
-    function conectar(){
+class conexion
+{
+    function conectar()
+    {
         $path = "datos.ini";
         $ar = parse_ini_file($path) or
             die("No se pudo abrir el archivo");
@@ -10,15 +12,11 @@ class conexion{
         $nombreBd = $ar['dbname'];
         //$con = new PDO("myqsl:host = $host; dbname = $nombreBd", $usuario, $contrBd);
         try {
-            $conexion = new PDO("mysql:host=$host;dbname=$nombreBd", $usuario, $contrBd);      
+            $conexion = new PDO("mysql:host=$host;dbname=$nombreBd", $usuario, $contrBd);
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          }
-     
-      catch(PDOException $e)
-          {
-          echo "La conexión ha fallado: " . $e->getMessage();
-          }
+        } catch (PDOException $e) {
+            echo "La conexión ha fallado: " . $e->getMessage();
+        }
         return $conexion;
     }
 }
-?>
